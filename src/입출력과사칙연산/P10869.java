@@ -16,7 +16,6 @@ public class P10869 {
         System.out.println(A + B);
         System.out.println(A - B);
         System.out.println(A * B);
-        System.out.println(A / B);
         System.out.println(A % B);
     }
 }
