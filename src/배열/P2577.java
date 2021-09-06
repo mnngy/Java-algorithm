@@ -6,14 +6,21 @@ import java.util.Scanner;
 public class P2577 {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int A = scanner.nextInt();
-        int B = scanner.nextInt();
-        int C = scanner.nextInt();
-        scanner.close();
+      Scanner scanner = new Scanner(System.in);
 
-        int result = A * B * C; // 1 7 0 3 7 3 0 0
+      int value = (scanner.nextInt() * scanner.nextInt() * scanner.nextInt());
+      String str = Integer.toString(value);
+      scanner.close();
 
+      for (int i = 0; i < 10; i++) {
+          int count = 0;
+          for (int j = 0; j < str.length(); j++) {
+              if ((str.charAt(j) - '0') == i) {
+                  count++;
+              }
+          }
+          System.out.println(count);
+      }
 
     }
 }
