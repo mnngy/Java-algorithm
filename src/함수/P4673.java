@@ -1,12 +1,14 @@
 package 함수;
 
+// 2번 풀었는데 다시 풀어도 좋을 거 같다
 // https://www.acmicpc.net/problem/4673
 public class P4673 {
 
     public static void main(String[] args) {
-        boolean[] check = new boolean[10001]; // 1~10000
 
-        for (int i = 0; i < 10001; i++) {
+        boolean[] check = new boolean[10001];
+
+        for (int i = 1; i < 10001; i++) {
             int n = d(i);
 
             if (n < 10001) {
@@ -18,7 +20,7 @@ public class P4673 {
 
         for (int i = 1; i < 10001; i++) {
             if (!check[i]) {
-                sb.append(i).append('\n');
+                sb.append(i).append("\n");
             }
         }
         System.out.println(sb);
@@ -26,12 +28,10 @@ public class P4673 {
 
     private static int d(int number) {
         int sum = number;
-
         while (number != 0) {
             sum = sum + (number % 10);
             number = number / 10;
         }
-
         return sum;
     }
 
