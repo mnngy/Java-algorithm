@@ -1,44 +1,80 @@
 package 문자열;
 
-import java.util.Scanner;
+import java.io.*;
 
-// 다시 풀어보기
-// https://www.acmicpc.net/problem/2941
+/*
+    크로아티아 알파벳
+
+    BufferedReader / BufferWriter: 버퍼를 이용하기 때문에 입출력의 효율이 빠르다.
+ */
 public class P2941 {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        // 문자열 입력
-        String s = scanner.nextLine();
-        scanner.close();
+        // 단어 입력
+        String word = br.readLine();
+        br.close();
 
-        // 크로아티아 알파벳 개수
+        char[] charArray = word.toCharArray();
         int count = 0;
 
-        char[] array = s.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
 
-        for (int i = 0; i < array.length; i++) {
-            if (i < array.length-1) {
-                if (array[i] == 'c') {
-                    if (array[i+1] == '=') i++;
-                    if (array[i+1] == '-') i++;
+            if (charArray[i] == 'c') {
+                if (i < charArray.length - 1){
+                    if (charArray[i + 1] == '=') {
+                        count++; i++;
+                        continue;
+                    } else if (charArray[i + 1] == '-') {
+                        count++; i++;
+                        continue;
+                    }
                 }
-
-                if (array[i] == 'd') {
-                    if (array[i+1] == 'z' || array[i+2] == '=') i++;
-                    if (array[i+1] == '-') i++;
-                }
-
-                if (array[i] == 'l' && array[i+1] == 'j') i++;
-                if (array[i] == 'n' && array[i+1] == 'j') i++;
-                if (array[i] == 's' && array[i+1] == '=') i++;
-                if (array[i] == 'z' && array[i+1] == '=') i++;
             }
 
+            if (charArray[i] == 'd') {
+                if (i < charArray.length - 2) {
+                    if (charArray[i + 1] == 'z' && charArray[i + 2] == '=') {
+                        count++;
+                        i += 2;
+                        continue;
+                    }
+                }
+                if (i < charArray.length - 1) {
+                    if (charArray[i + 1] == '-') {
+                        count++; i++;
+                        continue;
+                    }
+                }
+            }
+
+            if (i < charArray.length - 1) {
+                if (charArray[i] == 'l' && charArray[i + 1] == 'j') {
+                    count++; i++;
+                    continue;
+                }
+
+                if (charArray[i] == 'n' && charArray[i + 1] == 'j') {
+                    count++; i++;
+                    continue;
+                }
+
+                if (charArray[i] == 's' && charArray[i + 1] == '=') {
+                    count++; i++;
+                    continue;
+                }
+
+                if (charArray[i] == 'z' && charArray[i + 1] == '=') {
+                    count++; i++;
+                    continue;
+                }
+            }
             count++;
         }
-
-        System.out.println(count);
+        bw.write(count + "");
+        bw.flush();
+        bw.close();
     }
 }
