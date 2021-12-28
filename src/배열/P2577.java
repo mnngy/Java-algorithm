@@ -1,37 +1,32 @@
 package 배열;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-// 한 번더 풀어도 괜찮을 문제
-// 2가지 해결방법이 있다. 1. 문자열 분리 2. 값 비교
-// https://www.acmicpc.net/problem/2577
 public class P2577 {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    static long A, B, C;
+    static int[] count;
 
-        // A, B, C 입력 받기
-        int A = scanner.nextInt();
-        int B = scanner.nextInt();
-        int C = scanner.nextInt();
-        scanner.close();
+    public static void main(String[] args) throws IOException {
 
-        // 계산한 결과, 각각의 숫자가 몇 번씩 쓰였는지... 변수 선언
-        int result = A * B * C; // 17037300
-        int[] array = new int[10];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = 0;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        A = Integer.parseInt(br.readLine());
+        B = Integer.parseInt(br.readLine());
+        C = Integer.parseInt(br.readLine());
+
+        count = new int[10];
+
+        String temp = String.valueOf(A*B*C);
+
+        for (int i = 0; i < temp.length(); i++) {
+            ++count[Integer.parseInt(temp.substring(i, i+1))];
         }
 
-        // 각각의 숫자 몇 번씩 쓰였는지
-        while (result != 0) {
-            int n = result % 10;
-            ++array[n];
-            result = result / 10;
-        }
-
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
+        for (int i : count) {
+            System.out.println(i);
         }
     }
 }
