@@ -1,61 +1,37 @@
 package 재귀;
 
-import java.util.Scanner;
+import java.io.*;
+import java.util.Arrays;
 
-/*
-    별 찍기 - 10
-
-    무조건 한 번 더 풀기
- */
 public class P2447 {
 
-    static char[][] arr;
+    static char[][] chars;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt(); // 3, 9, 27...
-        scanner.close();
-
-        arr = new char[N][N];
-
-        star(0, 0, N, false);
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                sb.append(arr[i][j]);
-            }
-            sb.append("\n");
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int N = Integer.parseInt(br.readLine());
+        chars = new char[N][N];
+        for (int i = 0; i < chars.length; i++) {
+            Arrays.fill(chars[i], ' ');
         }
-        System.out.println(sb);
+        star(N, 0, 0);
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = 0; j < chars.length; j++) {
+                bw.write(chars[i][j]);
+            }
+            bw.write("\n");
+        }
+        bw.flush();
     }
 
-    private static void star(int x, int y, int N, boolean blank) {
-
-        // 공백칸
-        if (blank) {
-            for (int i = x; i < x + N; i++) {
-                for (int j = y; j < y + N; j++) {
-                    arr[i][j] = ' ';
-                }
-            }
-        }
-
-        // 더 이상 쪼갤 수 없는 블록
-        if (N == 1) {
-            arr[x][y] = '*';
-            return;
-        }
-
-        int size = N / 3; // 빈칸의 사이즈
-        int count = 0; // 별 출력 누적
-        for (int i = x; i < x + N; i += size) {
-            for (int j = y; j < y + N; j += size) {
-                count++;
-                if (count == 5) {
-                    star(i, j, size, true);
-                } else {
-                    star(i, j, size, false);
+    public static void star(int N, int y, int x) {
+        if(N == 1) chars[y][x] = '*';
+        else {
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if(i == 1 && j == 1);
+                    else star(N/3, y + N/3*i, x + N/3*j);
                 }
             }
         }

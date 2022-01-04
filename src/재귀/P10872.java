@@ -2,8 +2,6 @@ package 재귀;
 
 import java.util.Scanner;
 
-// https://www.acmicpc.net/problem/10872
-
 /*
     컴퓨터에서 재귀는 "자신을 정의할 때 자기 자신을 재 참조하는 방법"을 말한다.
 
@@ -22,15 +20,12 @@ public class P10872 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
+        System.out.println(factorial(scanner.nextInt()));
         scanner.close();
-
-        int sum = factorial(N);
-        System.out.println(sum);
     }
 
     private static int factorial(int N) {
-        if (N <= 1) {
+        if (N == 0) {
             return 1;
         }
         return N * factorial(N - 1);
